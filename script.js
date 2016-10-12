@@ -1,6 +1,3 @@
-<<<<<<< Local Changes
-document.getElementById('light').style.display='block';
-document.getElementById('fade').style.display='block';=======
 /*
 	Lightbox JS: Fullsize Image Overlays 
 	by Lokesh Dhakar - http://www.huddletogether.com
@@ -430,8 +427,21 @@ function addLoadEvent(func)
 
 }
 
+function request(){
+	var src = httpGet("http://thecatapi.com/api/images/" +
+	"get?format=html&results_per_page=2&size=medium");
+	document.getElementById("test").innerHTML = src;
 
-var src = httpGet("http://thecatapi.com/api/images/get");
-document.getElementsByClass[0].innerHTML = src;
+	var container = document.getElementById("test").children
+	for ( i = 0; i < container.length; i++ ){
+		container[i].removeAttribute("target");
+		container[i].setAttribute("rel", "lightbox");
+		container[i].setAttribute("href", container[i].children[0].getAttribute("src"));
+		container[i].children[0].setAttribute("height", "100");
+	}
 
+}
+
+
+addLoadEvent(request);
 addLoadEvent(initLightbox);	// run initLightbox onLoad>>>>>>> External Changes
